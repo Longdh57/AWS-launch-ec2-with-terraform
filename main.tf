@@ -6,7 +6,7 @@ provider "aws" {
 
 resource "aws_security_group" "web-server" {
 
-    name        = "web-server"
+    name        = "web-server-sg"
     description = "Allow incoming HTTP Connections"
     
     ingress {
@@ -16,8 +16,7 @@ resource "aws_security_group" "web-server" {
         protocol = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
 
-   }
-
+    }
     egress {
 
         from_port = 0
@@ -31,11 +30,9 @@ resource "aws_security_group" "web-server" {
 
 resource "aws_instance" "web-server" {
 
-    ami = "ami-02e136e904f3da870"
+    ami = "ami-0af2f764c580cc1f9"
 
     instance_type = "t2.micro"
-
-    key_name = "whizlabs-key"
 
     security_groups = ["${aws_security_group.web-server.name}"]
 
@@ -54,7 +51,7 @@ resource "aws_instance" "web-server" {
 
     systemctl enable httpd
 
-    echo "<html><h1> Welcome to Whizlabs. Happy Learning... </h1></html>" >> /var/www/html/index.html
+    echo "<html><h1> Welcome to First EC2 build with Terraform. Happy Learning... </h1></html>" >> /var/www/html/index.html
 
     EOF
 

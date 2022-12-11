@@ -2,6 +2,10 @@
 
 ## Overview
 Source code để dựng EC2 từ code terraform
+Mô tả:
+- Dựng 1 EC2 có cài đặt httpd để serve file html
+- Sau khi run `terraform apply` thành công, recheck bằng cách truy cập ip generate bởi terraform, nếu hiện `Welcome to First EC2 build with Terraform. Happy Learning...` là thành công 
+- Giải phóng resource `terraform destroy`. Check lại Instance đã terminated chưa.
 
 ## Download Terraform
 Link: https://www.terraform.io/downloads.html
@@ -39,8 +43,16 @@ $ git clone ...
 $ cd aws-launch-ec2-with-terraform
 $ cp terraform.tfvars.example terraform.tfvars // Điền your region, access_key, secret_key vào terraform.tfvars
 $ terraform init
-$ terraform plan
+$ terraform plan		// Chờ tầm 30s để terraform đọc code
 $ terraform apply		// Chờ 1 lát để terraform triển khai hạ tầng lên AWS, xong thì sẽ print ra output theo define ở output.tf Nên mở AWS console check lại
 
 $ terraform destroy		// Check lại AWS xem giải phóng resource chưa
 ```
+
+**Terraform Plan**
+
+![alt text](terraform_plan.png "Terraform Plan")
+
+**Terraform Apply**
+
+![alt text](terraform_apply.png "Terraform Apply")
